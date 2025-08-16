@@ -112,6 +112,16 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
+            // --- UI ELEMENT REFERENCES ---
+            const recalculateBtn = document.getElementById('recalculate-btn');
+            const statusDiv = document.getElementById('status');
+            const loaderOverlay = document.getElementById('loader-overlay');
+            const toggles = {
+                pharmacies: document.getElementById('pharmacies-toggle'),
+                groceries: document.getElementById('groceries-toggle'),
+                libraries: document.getElementById('libraries-toggle')
+            };
+
             // --- DATA SETUP ---
             // Load data from external JSON file
             let poiData = {};
@@ -129,16 +139,6 @@
                 statusDiv.className += ' text-red-600';
                 return; // Exit if we can't load the data
             }
-
-            // --- UI ELEMENT REFERENCES ---
-            const recalculateBtn = document.getElementById('recalculate-btn');
-            const statusDiv = document.getElementById('status');
-            const loaderOverlay = document.getElementById('loader-overlay');
-            const toggles = {
-                pharmacies: document.getElementById('pharmacies-toggle'),
-                groceries: document.getElementById('groceries-toggle'),
-                libraries: document.getElementById('libraries-toggle')
-            };
 
             // --- MAP INITIALIZATION ---
             // Center the map on Boston
