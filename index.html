@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boston Proximity Heatmap</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Leaflet.js for mapping -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
+    <!-- Leaflet.heat plugin for the heatmap layer -->
+    <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+
+    <style>
+        /* Set a specific height for the map container */
+        #map { 
+            height: 100%;
+            width: 100%;
+            border-radius: 0.5rem;
+        }
+        .font-inter {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom loader style */
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 8px solid #3498db;
+            width: 60px;
+            height: 60px;
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:,">
+</head>
+<body class="bg-gray-100 font-inter text-gray-800 flex flex-col h-screen">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md p-4 z-10">
+        <div class="container mx-auto">
+            <h1 class="text-2xl font-bold text-gray-700">Boston Proximity Score Heatmap</h1>
+            <p class="text-sm text-gray-500">Visualizing location scores based on distance to amenities.</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto p-4 flex flex-col md:flex-row gap-4">
+        
+        <!-- Controls and Legend Panel -->
+        <div class="w-full md:w-1/4 bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-lg font-semibold mb-4 border-b pb-2">Controls & Legend</h2>
+            
+            <div class="mb-6">
+                <h3 class="font-semibold mb-2">Categories</h3>
+                <div class="space-y-2">
+                    <label class="flex items-center">
+                        <input type="checkbox" id="pharmacies-toggle" class="form-checkbox h-5 w-5 text-blue-600 rounded" checked>
+                        <span class="ml-2 text-gray-700">Pharmacies</span>
+                    </label>
+                    <label class="flex items-center">
+                        <input type="checkbox" id="groceries-toggle" class="form-checkbox h-5 w-5 text-green-600 rounded" checked>
+                        <span class="ml-2 text-gray-700">Groceries</span>
+                    </label>
+                    <label class="flex items-center">
+                        <input type="checkbox" id="libraries-toggle" class="form-checkbox h-5 w-5 text-purple-600 rounded" checked>
+                        <span class="ml-2 text-gray-700">Libraries</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <button id="recalculate-btn" class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">
+                    Recalculate Heatmap
+                </button>
+            </div>
+
+            <div>
+                <h3 class="font-semibold mb-2">Legend</h3>
+                <div class="w-full h-8 rounded-md" style="background: linear-gradient(to right, blue, cyan, lime, yellow, red);"></div>
+                <div class="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>Low Score</span>
+                    <span>High Score</span>
+                </div>
+            </div>
+            
+            <div id="status" class="mt-4 text-sm text-gray-600"></div>
+        </div>
+
+        <!-- Map Container -->
+        <div class="w-full md:w-3/4 h-[60vh] md:h-auto bg-white p-2 rounded-lg shadow-md relative">
+            <div id="map"></div>
+            <!-- Loading Overlay -->
+            <div id="loader-overlay" class="absolute inset-0 bg-white bg-opacity-75 flex-col items-center justify-center rounded-lg hidden">
+                <div class="loader"></div>
+                <p class="mt-4 text-gray-700 font-semibold">Calculating scores...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Data will be loaded from external poi.json file -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // --- DATA SETUP ---
+            // Load data from external JSON file
+            let poiData = {};
+            
+            try {
+                const response = await fetch('poi.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                poiData = await response.json();
+                statusDiv.textContent = 'POI data loaded successfully.';
+            } catch (error) {
+                console.error('Error loading POI data:', error);
+                statusDiv.textContent = 'Error loading POI data. Please check that poi.json exists.';
+                statusDiv.className += ' text-red-600';
+                return; // Exit if we can't load the data
+            }
+
+            // --- UI ELEMENT REFERENCES ---
+            const recalculateBtn = document.getElementById('recalculate-btn');
+            const statusDiv = document.getElementById('status');
+            const loaderOverlay = document.getElementById('loader-overlay');
+            const toggles = {
+                pharmacies: document.getElementById('pharmacies-toggle'),
+                groceries: document.getElementById('groceries-toggle'),
+                libraries: document.getElementById('libraries-toggle')
+            };
+
+            // --- MAP INITIALIZATION ---
+            // Center the map on Boston
+            const map = L.map('map').setView([42.3601, -71.0589], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            let heatLayer = null;
+            let poiMarkers = L.layerGroup().addTo(map);
+
+            // --- CORE LOGIC ---
+
+            /**
+             * Calculates the Haversine distance between two lat/lng points.
+             * @param {number} lat1 Latitude of point 1
+             * @param {number} lon1 Longitude of point 1
+             * @param {number} lat2 Latitude of point 2
+             * @param {number} lon2 Longitude of point 2
+             * @returns {number} Distance in kilometers.
+             */
+            function getDistance(lat1, lon1, lat2, lon2) {
+                const R = 6371; // Radius of the Earth in km
+                const dLat = (lat2 - lat1) * Math.PI / 180;
+                const dLon = (lon2 - lon1) * Math.PI / 180;
+                const a =
+                    0.5 - Math.cos(dLat) / 2 +
+                    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                    (1 - Math.cos(dLon)) / 2;
+                return R * 2 * Math.asin(Math.sqrt(a));
+            }
+
+            // --- SCORING FUNCTIONS ---
+            // These functions are modular and can be easily swapped or modified.
+
+            /**
+             * Calculates score based on the distance to the single nearest point.
+             * Closer distance = higher score.
+             * @param {object} gridPoint - The {lat, lng} of the point being scored.
+             * @param {Array} categoryPois - Array of POIs for the category.
+             * @returns {number} The calculated score.
+             */
+            function scoreByNearest(gridPoint, categoryPois) {
+                if (categoryPois.length === 0) return 0;
+                let minDistance = Infinity;
+                for (const poi of categoryPois) {
+                    const distance = getDistance(gridPoint.lat, gridPoint.lng, poi.lat, poi.lng);
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                    }
+                }
+                // Score is inversely proportional to distance. Adding 0.1 to avoid division by zero
+                // and to soften the score for very close distances.
+                return 1 / (minDistance + 0.1);
+            }
+
+            /**
+             * Calculates score based on the average distance to the N closest points.
+             * @param {object} gridPoint - The {lat, lng} of the point being scored.
+             * @param {Array} categoryPois - Array of POIs for the category.
+             * @param {number} n - The number of closest points to consider.
+             * @returns {number} The calculated score.
+             */
+            function scoreByNClosest(gridPoint, categoryPois, n) {
+                if (categoryPois.length === 0) return 0;
+                const distances = categoryPois.map(poi => getDistance(gridPoint.lat, gridPoint.lng, poi.lat, poi.lng));
+                distances.sort((a, b) => a - b);
+                const closestDistances = distances.slice(0, n);
+                const avgDistance = closestDistances.reduce((sum, d) => sum + d, 0) / closestDistances.length;
+                return 1 / (avgDistance + 0.1);
+            }
+
+            // Map categories to their scoring functions
+            const scoringFunctions = {
+                pharmacies: (point, pois) => scoreByNearest(point, pois),
+                groceries: (point, pois) => scoreByNearest(point, pois),
+                libraries: (point, pois) => scoreByNClosest(point, pois, 3)
+            };
+            
+            /**
+             * Main function to generate heatmap data.
+             */
+            async function generateHeatmap() {
+                loaderOverlay.style.display = 'flex';
+                statusDiv.textContent = 'Generating grid and calculating scores...';
+
+                // Use a timeout to allow the UI to update before the heavy calculation starts
+                await new Promise(resolve => setTimeout(resolve, 50));
+
+                const bounds = map.getBounds();
+                const northEast = bounds.getNorthEast();
+                const southWest = bounds.getSouthWest();
+                
+                // Define the resolution of our grid. Smaller step = higher resolution = slower.
+                const step = 0.0005; 
+                
+                const heatPoints = [];
+                let maxScore = 0;
+
+                // Get active categories from toggles
+                const activeCategories = Object.keys(toggles).filter(cat => toggles[cat].checked);
+                const activePois = {};
+                activeCategories.forEach(cat => {
+                    activePois[cat] = poiData[cat];
+                });
+
+                // Loop through the grid
+                for (let lat = southWest.lat; lat < northEast.lat; lat += step) {
+                    for (let lng = southWest.lng; lng < northEast.lng; lng += step) {
+                        let totalScore = 0;
+                        const gridPoint = { lat, lng };
+
+                        // Calculate score for each active category and add to total
+                        for (const category of activeCategories) {
+                            const scoreFn = scoringFunctions[category];
+                            if (scoreFn) {
+                                totalScore += scoreFn(gridPoint, activePois[category]);
+                            }
+                        }
+                        
+                        if (totalScore > 0) {
+                            heatPoints.push({ lat, lng, score: totalScore });
+                            if (totalScore > maxScore) {
+                                maxScore = totalScore;
+                            }
+                        }
+                    }
+                }
+                
+                statusDiv.textContent = `Calculated scores for ${heatPoints.length} points.`;
+
+                // Normalize scores and format for the heat layer
+                const normalizedHeatData = heatPoints.map(p => [p.lat, p.lng, p.score / maxScore]);
+
+                // Update the map
+                updateMapLayers(normalizedHeatData, activePois);
+                
+                loaderOverlay.style.display = 'none';
+            }
+
+            /**
+             * Updates the heatmap and marker layers on the map.
+             * @param {Array} heatData - The normalized data for the heatmap.
+             * @param {object} activePois - The POIs to display as markers.
+             */
+            function updateMapLayers(heatData, activePois) {
+                // 1. Handle the Heat Layer
+                // Remove old heat layer if it exists
+                if (heatLayer) {
+                    map.removeLayer(heatLayer);
+                    heatLayer = null;
+                }
+
+                // Add new heat layer only if there is data
+                if (heatData && heatData.length > 0) {
+                    // FIX: Ensure the map has the correct size before adding the canvas-based heat layer.
+                    // This prevents race conditions where the map container hasn't been rendered with its full size yet.
+                    map.invalidateSize();
+
+                    heatLayer = L.heatLayer(heatData, {
+                        radius: 25,
+                        blur: 15,
+                        maxZoom: 17,
+                    }).addTo(map);
+                }
+
+                // 2. Handle the POI Markers
+                poiMarkers.clearLayers();
+                const iconMapping = {
+                    pharmacies: L.divIcon({className: 'text-2xl', html: '⚕️'}),
+                    groceries: L.divIcon({className: 'text-2xl', html: '🛒'}),
+                    libraries: L.divIcon({className: 'text-2xl', html: '📚'}),
+                };
+                
+                for (const category in activePois) {
+                    activePois[category].forEach(poi => {
+                        L.marker([poi.lat, poi.lng], {icon: iconMapping[category]})
+                         .bindPopup(poi.name)
+                         .addTo(poiMarkers);
+                    });
+                }
+            }
+            
+            // --- EVENT LISTENERS ---
+            recalculateBtn.addEventListener('click', generateHeatmap);
+
+            // Initial calculation on page load (only if data loaded successfully)
+            if (Object.keys(poiData).length > 0) {
+                generateHeatmap();
+            }
+        });
+    </script>
+</body>
+</html>

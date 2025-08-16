@@ -1,0 +1,21 @@
+{
+    "pharmacies": [
+        { "name": "CVS", "lat": 42.359, "lng": -71.062 },
+        { "name": "Walgreens", "lat": 42.365, "lng": -71.061 },
+        { "name": "CVS", "lat": 42.352, "lng": -71.055 },
+        { "name": "Rite Aid", "lat": 42.348, "lng": -71.075 }
+    ],
+    "groceries": [
+        { "name": "Whole Foods", "lat": 42.363, "lng": -71.066 },
+        { "name": "Star Market", "lat": 42.355, "lng": -71.071 },
+        { "name": "Trader Joe's", "lat": 42.349, "lng": -71.082 },
+        { "name": "Roche Bros", "lat": 42.351, "lng": -71.060 }
+    ],
+    "libraries": [
+        { "name": "BPL Central", "lat": 42.349, "lng": -71.078 },
+        { "name": "BPL North End", "lat": 42.364, "lng": -71.055 },
+        { "name": "BPL West End", "lat": 42.362, "lng": -71.067 },
+        { "name": "BPL South End", "lat": 42.343, "lng": -71.074 },
+        { "name": "Cambridge PL", "lat": 42.373, "lng": -71.105 }
+    ]
+}
