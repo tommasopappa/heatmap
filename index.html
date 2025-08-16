@@ -65,12 +65,8 @@
                 <h3 class="font-semibold mb-2">Categories</h3>
                 <div class="space-y-2">
                     <label class="flex items-center">
-                        <input type="checkbox" id="pharmacies-toggle" class="form-checkbox h-5 w-5 text-blue-600 rounded" checked>
-                        <span class="ml-2 text-gray-700">Pharmacies</span>
-                    </label>
-                    <label class="flex items-center">
-                        <input type="checkbox" id="groceries-toggle" class="form-checkbox h-5 w-5 text-green-600 rounded" checked>
-                        <span class="ml-2 text-gray-700">Groceries</span>
+                        <input type="checkbox" id="stations-toggle" class="form-checkbox h-5 w-5 text-blue-600 rounded" checked>
+                        <span class="ml-2 text-gray-700">Stations</span>
                     </label>
                     <label class="flex items-center">
                         <input type="checkbox" id="libraries-toggle" class="form-checkbox h-5 w-5 text-purple-600 rounded" checked>
@@ -117,8 +113,7 @@
             const statusDiv = document.getElementById('status');
             const loaderOverlay = document.getElementById('loader-overlay');
             const toggles = {
-                pharmacies: document.getElementById('pharmacies-toggle'),
-                groceries: document.getElementById('groceries-toggle'),
+                stations: document.getElementById('stations-toggle'),
                 libraries: document.getElementById('libraries-toggle')
             };
 
@@ -127,15 +122,22 @@
             let poiData = {};
             
             try {
-                const response = await fetch('poi.json');
+                const response = await fetch('boston_locations.json');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                poiData = await response.json();
-                statusDiv.textContent = 'POI data loaded successfully.';
+                const locationData = await response.json();
+                
+                // Transform the data to match our POI structure
+                poiData = {
+                    stations: locationData.stations || [],
+                    libraries: locationData['public libraries'] || []
+                };
+                
+                statusDiv.textContent = `Loaded ${poiData.stations.length} stations and ${poiData.libraries.length} libraries.`;
             } catch (error) {
                 console.error('Error loading POI data:', error);
-                statusDiv.textContent = 'Error loading POI data. Please check that poi.json exists.';
+                statusDiv.textContent = 'Error loading location data. Please check that boston_locations.json exists.';
                 statusDiv.className += ' text-red-600';
                 return; // Exit if we can't load the data
             }
@@ -214,9 +216,9 @@
 
             // Map categories to their scoring functions
             const scoringFunctions = {
-                pharmacies: (point, pois) => scoreByNearest(point, pois),
-                groceries: (point, pois) => scoreByNearest(point, pois),
-                libraries: (point, pois) => scoreByNClosest(point, pois, 3)
+                stations: (point, pois) => scoreByNearest(point, pois),
+                libraries: (point, pois) => scoreByNearest(point, pois)  // Changed to use same algorithm as stations
+                // libraries: (point, pois) => scoreByNClosest(point, pois, 3)  // Original: average of 3 closest
             };
             
             /**
@@ -309,8 +311,7 @@
                 // 2. Handle the POI Markers
                 poiMarkers.clearLayers();
                 const iconMapping = {
-                    pharmacies: L.divIcon({className: 'text-2xl', html: '⚕️'}),
-                    groceries: L.divIcon({className: 'text-2xl', html: '🛒'}),
+                    stations: L.divIcon({className: 'text-2xl', html: '🚇'}),
                     libraries: L.divIcon({className: 'text-2xl', html: '📚'}),
                 };
                 

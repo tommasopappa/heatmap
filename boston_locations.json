@@ -1,0 +1,761 @@
+{
+    "stations": [
+        {
+            "name": "Downtown Crossing",
+            "lat": 42.355518,
+            "lng": -71.060225
+        },
+        {
+            "name": "Science Park/West End",
+            "lat": 42.366664,
+            "lng": -71.067666
+        },
+        {
+            "name": "Boylston",
+            "lat": 42.353214,
+            "lng": -71.064545
+        },
+        {
+            "name": "Quincy Center",
+            "lat": 42.251809,
+            "lng": -71.005409
+        },
+        {
+            "name": "Dean Road",
+            "lat": 42.337807,
+            "lng": -71.141753
+        },
+        {
+            "name": "Copley",
+            "lat": 42.350126,
+            "lng": -71.077376
+        },
+        {
+            "name": "JFK/UMass",
+            "lat": 42.320434,
+            "lng": -71.052215
+        },
+        {
+            "name": "Boston University Central",
+            "lat": 42.350013,
+            "lng": -71.106902
+        },
+        {
+            "name": "Milton",
+            "lat": 42.270308,
+            "lng": -71.067289
+        },
+        {
+            "name": "Saint Paul Street",
+            "lat": 42.343118,
+            "lng": -71.117498
+        },
+        {
+            "name": "Symphony",
+            "lat": 42.342687,
+            "lng": -71.085056
+        },
+        {
+            "name": "Fields Corner",
+            "lat": 42.299935,
+            "lng": -71.061945
+        },
+        {
+            "name": "Griggs Street",
+            "lat": 42.348919,
+            "lng": -71.134305
+        },
+        {
+            "name": "Haymarket",
+            "lat": 42.363021,
+            "lng": -71.05829
+        },
+        {
+            "name": "Chestnut Hill Avenue",
+            "lat": 42.33873,
+            "lng": -71.152526
+        },
+        {
+            "name": "Beaconsfield",
+            "lat": 42.335625,
+            "lng": -71.140112
+        },
+        {
+            "name": "Kenmore",
+            "lat": 42.348949,
+            "lng": -71.095169
+        },
+        {
+            "name": "Government Center",
+            "lat": 42.359705,
+            "lng": -71.059215
+        },
+        {
+            "name": "Bowdoin",
+            "lat": 42.361365,
+            "lng": -71.062037
+        },
+        {
+            "name": "Englewood Avenue",
+            "lat": 42.336964,
+            "lng": -71.145867
+        },
+        {
+            "name": "Riverside",
+            "lat": 42.337317,
+            "lng": -71.252256
+        },
+        {
+            "name": "Mattapan",
+            "lat": 42.267559,
+            "lng": -71.092233
+        },
+        {
+            "name": "Woodland",
+            "lat": 42.332703,
+            "lng": -71.243055
+        },
+        {
+            "name": "Sullivan Square",
+            "lat": 42.383975,
+            "lng": -71.076994
+        },
+        {
+            "name": "Northeastern University",
+            "lat": 42.339897,
+            "lng": -71.09021
+        },
+        {
+            "name": "Park Street",
+            "lat": 42.356395,
+            "lng": -71.062424
+        },
+        {
+            "name": "Savin Hill",
+            "lat": 42.310603,
+            "lng": -71.053678
+        },
+        {
+            "name": "Valley Road",
+            "lat": 42.268347,
+            "lng": -71.081343
+        },
+        {
+            "name": "Medford/Tufts",
+            "lat": 42.408306,
+            "lng": -71.11728
+        },
+        {
+            "name": "Waban",
+            "lat": 42.325695,
+            "lng": -71.230476
+        },
+        {
+            "name": "Amory Street",
+            "lat": 42.350901,
+            "lng": -71.114318
+        },
+        {
+            "name": "Wood Island",
+            "lat": 42.379671,
+            "lng": -71.022783
+        },
+        {
+            "name": "Reservoir",
+            "lat": 42.335163,
+            "lng": -71.148601
+        },
+        {
+            "name": "Community College",
+            "lat": 42.373622,
+            "lng": -71.069533
+        },
+        {
+            "name": "Chinatown",
+            "lat": 42.352547,
+            "lng": -71.062752
+        },
+        {
+            "name": "Blandford Street",
+            "lat": 42.349276,
+            "lng": -71.100213
+        },
+        {
+            "name": "Suffolk Downs",
+            "lat": 42.390422,
+            "lng": -70.997323
+        },
+        {
+            "name": "Braintree",
+            "lat": 42.207424,
+            "lng": -71.001645
+        },
+        {
+            "name": "South Street",
+            "lat": 42.339581,
+            "lng": -71.157499
+        },
+        {
+            "name": "Hynes Convention Center",
+            "lat": 42.347888,
+            "lng": -71.087903
+        },
+        {
+            "name": "Jackson Square",
+            "lat": 42.323132,
+            "lng": -71.099592
+        },
+        {
+            "name": "Aquarium",
+            "lat": 42.359784,
+            "lng": -71.051652
+        },
+        {
+            "name": "Central",
+            "lat": 42.365379,
+            "lng": -71.103554
+        },
+        {
+            "name": "Revere Beach",
+            "lat": 42.407874,
+            "lng": -70.992497
+        },
+        {
+            "name": "Central Avenue",
+            "lat": 42.270001,
+            "lng": -71.073358
+        },
+        {
+            "name": "North Quincy",
+            "lat": 42.275802,
+            "lng": -71.030144
+        },
+        {
+            "name": "Green Street",
+            "lat": 42.309832,
+            "lng": -71.108059
+        },
+        {
+            "name": "Beachmont",
+            "lat": 42.397219,
+            "lng": -70.992647
+        },
+        {
+            "name": "Ashmont",
+            "lat": 42.283768,
+            "lng": -71.063191
+        },
+        {
+            "name": "Roxbury Crossing",
+            "lat": 42.33064,
+            "lng": -71.09604
+        },
+        {
+            "name": "Back of the Hill",
+            "lat": 42.329399,
+            "lng": -71.110931
+        },
+        {
+            "name": "Boston College",
+            "lat": 42.34024,
+            "lng": -71.166849
+        },
+        {
+            "name": "Wollaston",
+            "lat": 42.266762,
+            "lng": -71.020542
+        },
+        {
+            "name": "Babcock Street",
+            "lat": 42.351695,
+            "lng": -71.120257
+        },
+        {
+            "name": "North Station",
+            "lat": 42.36528,
+            "lng": -71.060205
+        },
+        {
+            "name": "Maverick",
+            "lat": 42.369119,
+            "lng": -71.03953
+        },
+        {
+            "name": "Brookline Hills",
+            "lat": 42.331413,
+            "lng": -71.127025
+        },
+        {
+            "name": "Ball Square",
+            "lat": 42.40038,
+            "lng": -71.111331
+        },
+        {
+            "name": "Assembly",
+            "lat": 42.392331,
+            "lng": -71.077262
+        },
+        {
+            "name": "South Station",
+            "lat": 42.352271,
+            "lng": -71.055242
+        },
+        {
+            "name": "East Somerville",
+            "lat": 42.379624,
+            "lng": -71.086829
+        },
+        {
+            "name": "Kendall/MIT",
+            "lat": 42.362355,
+            "lng": -71.085605
+        },
+        {
+            "name": "Tufts Medical Center",
+            "lat": 42.349662,
+            "lng": -71.063917
+        },
+        {
+            "name": "Museum of Fine Arts",
+            "lat": 42.338017,
+            "lng": -71.094682
+        },
+        {
+            "name": "Quincy Adams",
+            "lat": 42.233391,
+            "lng": -71.007153
+        },
+        {
+            "name": "Porter",
+            "lat": 42.3884,
+            "lng": -71.119149
+        },
+        {
+            "name": "Eliot",
+            "lat": 42.319214,
+            "lng": -71.216949
+        },
+        {
+            "name": "Boston University East",
+            "lat": 42.349659,
+            "lng": -71.103989
+        },
+        {
+            "name": "Orient Heights",
+            "lat": 42.386842,
+            "lng": -71.004767
+        },
+        {
+            "name": "Heath Street",
+            "lat": 42.328316,
+            "lng": -71.110252
+        },
+        {
+            "name": "Chestnut Hill",
+            "lat": 42.326799,
+            "lng": -71.164146
+        },
+        {
+            "name": "Prudential",
+            "lat": 42.34557,
+            "lng": -71.081696
+        },
+        {
+            "name": "Butler",
+            "lat": 42.272477,
+            "lng": -71.062438
+        },
+        {
+            "name": "Coolidge Corner",
+            "lat": 42.342274,
+            "lng": -71.120915
+        },
+        {
+            "name": "Hawes Street",
+            "lat": 42.344758,
+            "lng": -71.111761
+        },
+        {
+            "name": "Brandon Hall",
+            "lat": 42.340053,
+            "lng": -71.128869
+        },
+        {
+            "name": "Gilman Square",
+            "lat": 42.388043,
+            "lng": -71.096956
+        },
+        {
+            "name": "State",
+            "lat": 42.358978,
+            "lng": -71.057598
+        },
+        {
+            "name": "Ruggles",
+            "lat": 42.336451,
+            "lng": -71.089635
+        },
+        {
+            "name": "Cedar Grove",
+            "lat": 42.279693,
+            "lng": -71.060381
+        },
+        {
+            "name": "Mission Park",
+            "lat": 42.333092,
+            "lng": -71.10968
+        },
+        {
+            "name": "Arlington",
+            "lat": 42.351902,
+            "lng": -71.070893
+        },
+        {
+            "name": "Fenway",
+            "lat": 42.345029,
+            "lng": -71.104968
+        },
+        {
+            "name": "Malden Center",
+            "lat": 42.426677,
+            "lng": -71.074381
+        },
+        {
+            "name": "Warren Street",
+            "lat": 42.348285,
+            "lng": -71.140436
+        },
+        {
+            "name": "Allston Street",
+            "lat": 42.348546,
+            "lng": -71.137362
+        },
+        {
+            "name": "Newton Highlands",
+            "lat": 42.322738,
+            "lng": -71.205082
+        },
+        {
+            "name": "Brigham Circle",
+            "lat": 42.334846,
+            "lng": -71.103017
+        },
+        {
+            "name": "Longwood",
+            "lat": 42.341808,
+            "lng": -71.109777
+        },
+        {
+            "name": "Broadway",
+            "lat": 42.342622,
+            "lng": -71.056967
+        },
+        {
+            "name": "Back Bay",
+            "lat": 42.34735,
+            "lng": -71.075727
+        },
+        {
+            "name": "Wellington",
+            "lat": 42.401507,
+            "lng": -71.07715
+        },
+        {
+            "name": "Harvard Avenue",
+            "lat": 42.350263,
+            "lng": -71.131298
+        },
+        {
+            "name": "Harvard",
+            "lat": 42.374663,
+            "lng": -71.118814
+        },
+        {
+            "name": "Cleveland Circle",
+            "lat": 42.336252,
+            "lng": -71.148774
+        },
+        {
+            "name": "Brookline Village",
+            "lat": 42.33257,
+            "lng": -71.117041
+        },
+        {
+            "name": "Kent Street",
+            "lat": 42.343927,
+            "lng": -71.114569
+        },
+        {
+            "name": "Magoun Square",
+            "lat": 42.39405,
+            "lng": -71.106688
+        },
+        {
+            "name": "Massachusetts Avenue",
+            "lat": 42.340927,
+            "lng": -71.084188
+        },
+        {
+            "name": "Saint Mary's Street",
+            "lat": 42.345884,
+            "lng": -71.107697
+        },
+        {
+            "name": "Airport",
+            "lat": 42.374262,
+            "lng": -71.030395
+        },
+        {
+            "name": "Chiswick Road",
+            "lat": 42.340808,
+            "lng": -71.150633
+        },
+        {
+            "name": "Sutherland Road",
+            "lat": 42.341589,
+            "lng": -71.146089
+        },
+        {
+            "name": "Union Square",
+            "lat": 42.377024,
+            "lng": -71.093964
+        },
+        {
+            "name": "Davis",
+            "lat": 42.39674,
+            "lng": -71.121815
+        },
+        {
+            "name": "Washington Street",
+            "lat": 42.344329,
+            "lng": -71.142385
+        },
+        {
+            "name": "Riverway",
+            "lat": 42.331871,
+            "lng": -71.111961
+        },
+        {
+            "name": "Shawmut",
+            "lat": 42.293126,
+            "lng": -71.065738
+        },
+        {
+            "name": "Charles/MGH",
+            "lat": 42.361187,
+            "lng": -71.071505
+        },
+        {
+            "name": "Summit Avenue",
+            "lat": 42.34112,
+            "lng": -71.125652
+        },
+        {
+            "name": "Fenwood Road",
+            "lat": 42.33374,
+            "lng": -71.105721
+        },
+        {
+            "name": "Lechmere",
+            "lat": 42.371566,
+            "lng": -71.076457
+        },
+        {
+            "name": "Wonderland",
+            "lat": 42.413361,
+            "lng": -70.991685
+        },
+        {
+            "name": "Stony Brook",
+            "lat": 42.317062,
+            "lng": -71.104248
+        },
+        {
+            "name": "Newton Centre",
+            "lat": 42.329552,
+            "lng": -71.192024
+        },
+        {
+            "name": "Packard's Corner",
+            "lat": 42.351651,
+            "lng": -71.12551
+        },
+        {
+            "name": "Longwood Medical Area",
+            "lat": 42.336217,
+            "lng": -71.099328
+        },
+        {
+            "name": "Alewife",
+            "lat": 42.396148,
+            "lng": -71.140698
+        },
+        {
+            "name": "Forest Hills",
+            "lat": 42.300926,
+            "lng": -71.114129
+        },
+        {
+            "name": "Andrew",
+            "lat": 42.330154,
+            "lng": -71.057655
+        },
+        {
+            "name": "Washington Square",
+            "lat": 42.339519,
+            "lng": -71.134587
+        },
+        {
+            "name": "Tappan Street",
+            "lat": 42.338498,
+            "lng": -71.138731
+        },
+        {
+            "name": "Oak Grove",
+            "lat": 42.437735,
+            "lng": -71.070875
+        },
+        {
+            "name": "Capen Street",
+            "lat": 42.267563,
+            "lng": -71.087338
+        },
+        {
+            "name": "Fairbanks Street",
+            "lat": 42.339644,
+            "lng": -71.131078
+        }
+    ],
+    "public libraries": [
+        {
+            "name": "West End",
+            "lat": 42.361438011000075,
+            "lng": -71.06500581699999
+        },
+        {
+            "name": "Codman Square",
+            "lat": 42.28751054500003,
+            "lng": -71.07096746299999
+        },
+        {
+            "name": "Hyde Park",
+            "lat": 42.25709536100004,
+            "lng": -71.12213519999995
+        },
+        {
+            "name": "Connolly",
+            "lat": 42.32063710400007,
+            "lng": -71.11109806099995
+        },
+        {
+            "name": "Roxbury",
+            "lat": 42.32800912500005,
+            "lng": -71.08351512599995
+        },
+        {
+            "name": "Central",
+            "lat": 42.34942646600007,
+            "lng": -71.07886869799995
+        },
+        {
+            "name": "North End",
+            "lat": 42.36407118900007,
+            "lng": -71.05502431699995
+        },
+        {
+            "name": "South End",
+            "lat": 42.34132346500007,
+            "lng": -71.07703141299999
+        },
+        {
+            "name": "Honan-Allston",
+            "lat": 42.36010429100003,
+            "lng": -71.12810638899998
+        },
+        {
+            "name": "Brighton",
+            "lat": 42.34767683100006,
+            "lng": -71.15290593999998
+        },
+        {
+            "name": "Faneuil",
+            "lat": 42.35131398500005,
+            "lng": -71.16787748599995
+        },
+        {
+            "name": "Charlestown",
+            "lat": 42.37580775600003,
+            "lng": -71.06443778199997
+        },
+        {
+            "name": "Adams Street",
+            "lat": 42.28626514000007,
+            "lng": -71.05440456199995
+        },
+        {
+            "name": "Fields Corner",
+            "lat": 42.29887679500007,
+            "lng": -71.06030591799998
+        },
+        {
+            "name": "Lower Mills",
+            "lat": 42.273542803000055,
+            "lng": -71.06850832799995
+        },
+        {
+            "name": "Uphams Corner",
+            "lat": 42.31484503400003,
+            "lng": -71.06753420599995
+        },
+        {
+            "name": "East Boston",
+            "lat": 42.377757657000075,
+            "lng": -71.02857666099999
+        },
+        {
+            "name": "Jamaica Plain",
+            "lat": 42.30862508400003,
+            "lng": -71.11487789399996
+        },
+        {
+            "name": "Mattapan",
+            "lat": 42.27751531300004,
+            "lng": -71.09313923499997
+        },
+        {
+            "name": "Roslindale",
+            "lat": 42.285638826000024,
+            "lng": -71.12865396099994
+        },
+        {
+            "name": "Egleston Square",
+            "lat": 42.31404811800007,
+            "lng": -71.09563158699996
+        },
+        {
+            "name": "Grove Hall",
+            "lat": 42.30797906400005,
+            "lng": -71.08119317099994
+        },
+        {
+            "name": "Parker Hill",
+            "lat": 42.33245270100008,
+            "lng": -71.09907885899997
+        },
+        {
+            "name": "West Roxbury",
+            "lat": 42.283387090000076,
+            "lng": -71.15744949299994
+        },
+        {
+            "name": "South Boston",
+            "lat": 42.335827368000025,
+            "lng": -71.03871800899998
+        },
+        {
+            "name": "Chinatown",
+            "lat": 42.35213129300007,
+            "lng": -71.06313587799997
+        }
+    ]
+}
